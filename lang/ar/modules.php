@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'leads' => 'العملاء المحتملون',
+    'customers' => 'العملاء',
+    'opportunities' => 'الفرص',
+    'activities' => 'الأنشطة',
+    'sales-orders' => 'أوامر البيع',
+    'invoices' => 'الفواتير',
+    'payments' => 'المدفوعات',
+    'expenses' => 'المصروفات',
+    'suppliers' => 'الموردون',
+    'purchase-orders' => 'أوامر الشراء',
+    'products' => 'المنتجات',
+    'categories' => 'التصنيفات',
+    'units' => 'الوحدات',
+    'warehouses' => 'المخازن',
+    'stock' => 'المخزون',
+    'tickets' => 'تذاكر الدعم',
+    'employees' => 'الموظفون',
+    'departments' => 'الأقسام',
+    'payroll' => 'الرواتب',
+    'attendance' => 'الحضور',
+    'reports' => 'التقارير',
+    'users' => 'المستخدمون',
+    'roles' => 'الأدوار والصلاحيات',
+    'audit-logs' => 'سجل التدقيق',
+];

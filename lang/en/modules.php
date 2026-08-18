@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'leads' => 'Leads',
+    'customers' => 'Customers',
+    'opportunities' => 'Opportunities',
+    'activities' => 'Activities',
+    'sales-orders' => 'Sales Orders',
+    'invoices' => 'Invoices',
+    'payments' => 'Payments',
+    'expenses' => 'Expenses',
+    'suppliers' => 'Suppliers',
+    'purchase-orders' => 'Purchase Orders',
+    'products' => 'Products',
+    'categories' => 'Categories',
+    'units' => 'Units',
+    'warehouses' => 'Warehouses',
+    'stock' => 'Stock',
+    'tickets' => 'Support Tickets',
+    'employees' => 'Employees',
+    'departments' => 'Departments',
+    'payroll' => 'Payroll',
+    'attendance' => 'Attendance',
+    'reports' => 'Reports',
+    'users' => 'Users',
+    'roles' => 'Roles & Permissions',
+    'audit-logs' => 'Audit Logs',
+];
