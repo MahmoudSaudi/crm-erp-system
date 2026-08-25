@@ -31,7 +31,7 @@
 
         {{-- Filters --}}
         <form method="GET" action="{{ route('stock.index') }}" class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <div>
                     <x-input-label for="search" value="بحث" />
                     <x-text-input id="search" name="search" type="text" class="mt-1 block w-full" value="{{ request('search') }}" placeholder="اسم المنتج أو SKU..." />

@@ -9,7 +9,7 @@
 
         {{-- Filters --}}
         <form method="GET" action="{{ route('audit-logs.index') }}" class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <div>
                     <x-input-label for="search" value="بحث" />
                     <x-text-input id="search" name="search" type="text" class="mt-1 block w-full" value="{{ request('search') }}" placeholder="الإجراء، النموذج، IP..." />
@@ -32,7 +32,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="sm:col-span-3 flex items-end gap-2">
+                <div class="flex items-end gap-2">
                     <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600">
                         {{ __('تصفية') }}
                     </button>

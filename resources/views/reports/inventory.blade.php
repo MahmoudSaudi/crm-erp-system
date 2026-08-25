@@ -2,9 +2,18 @@
     <x-slot name="title">{{ __('تقرير المخزون') }}</x-slot>
 
     <div class="space-y-6">
-        <div>
-            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">{{ __('تقرير المخزون') }}</h2>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">{{ __('قيمة المخزون والمنتجات منخفضة التوزيع حسب المستودعات') }}</p>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <a href="{{ route('reports.index') }}" class="flex items-center justify-center p-2 rounded-lg text-slate-500 bg-white border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-colors dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-white" title="{{ __('العودة للتقارير') }}">
+                    <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">{{ __('تقرير المخزون') }}</h2>
+                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">{{ __('قيمة المخزون والمنتجات منخفضة التوزيع حسب المستودعات') }}</p>
+                </div>
+            </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">

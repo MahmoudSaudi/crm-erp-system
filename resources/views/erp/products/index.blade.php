@@ -17,7 +17,7 @@
 
         {{-- Filters --}}
         <form method="GET" action="{{ route('products.index') }}" class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <div>
                     <x-input-label for="search" value="بحث" />
                     <x-text-input id="search" name="search" type="text" class="mt-1 block w-full" value="{{ request('search') }}" placeholder="الاسم، SKU، الباركود..." />
@@ -39,13 +39,13 @@
                         <option value="out" @selected($activeStatus === 'out')>نفد المخزون</option>
                     </select>
                 </div>
-                <div class="sm:col-span-3 flex items-end gap-2">
+                <div class="flex items-end gap-2">
                     <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         {{ __('تصفية') }}
                     </button>
                     @if (request()->hasAny(['search', 'category_id', 'stock_status']))
-                        <a href="{{ route('products.index') }}" class="ms-2 inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800">{{ __('مسح') }}</a>
+                        <a href="{{ route('products.index') }}" class="inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800">{{ __('مسح') }}</a>
                     @endif
                 </div>
             </div>

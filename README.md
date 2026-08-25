@@ -1,142 +1,146 @@
-# CRM ERP — نظام متكامل لإدارة علاقات العملاء والموارد المؤسسية
+# Nexus CRM & ERP System
 
-**إدارة العملاء | المبيعات والفواتير | الموردون والمشتريات | المخزون | تذاكر الدعم | الموارد البشرية والرواتب | التقارير**
+**Customer Management | Sales & Invoicing | Procurement | Inventory | Support Tickets | Human Resources & Payroll | Analytics & Reporting**
 
-نظام ويب كامل (RTL عربي) مبني بـ **Laravel 11 + MySQL** يدمج إدارة علاقات العملاء (CRM) مع تخطيط موارد المؤسسة (ERP). المشروع منتج للبورتفوليو: 8 أدوار وصلاحيات، سجل تدقيق شامل، إخطارات، واجهات RTL تدعم الوضع الليلي، و**142 اختبارًا ناجحًا**.
+A comprehensive, enterprise-grade web application built with **Laravel 11** and **MySQL**. This system seamlessly integrates Customer Relationship Management (CRM) with Enterprise Resource Planning (ERP). Designed as a production-ready application, it features an advanced Role-Based Access Control (RBAC) system with 8 distinct roles, comprehensive audit logging, internal notifications, full RTL support, a dynamic dark mode interface, and **142 passing automated tests**.
 
-> **Accounts (Demo)**: `admin@crm.test` / `password` — أو أي من أدوار الـ demo الأخرى (مدير مبيعات، محاسب، مأمور مخزن، مسؤول مشتريات، أخصائي دعم، أخصائي موارد بشرية …).
-
----
-
-## 🧩 المزايا
-
-### إدارة العملاء (CRM)
-- **العملاء المحتملون (Leads)**: إنشاء، مصادر، حالات، متابعات، تحويل إلى عميل.
-- **العملاء**: شركات/أفراد، حدود ائتمانية، أرصدة، سجل تعاملات.
-- **الفرص (Opportunities)**: مراحل قابلة للترتيب، احتمالات الإغلاق، لوحة Pipeline.
-- **الأنشطة**: مكالمات، بريد، اجتماعات، مهام مع الجدولة والإكمال.
-
-### المبيعات والمالية
-- **أوامر البيع**: مسودة → مؤكد → منفذ → ملغي، خصومات وشحن وإعادة حساب تلقائية وخصم تلقائي من المخزون عند التأكيد.
-- **الفواتير**: إنشاء من الأوامر المؤكدة، حالات مسودة/مرسلة/مدفوعة جزئيًا/مدفوعة/متأخرة، طباعة.
-- **المدفوعات**: نقدي/تحويل/شيك/بطاقة مع إعادة حساب الحالة تلقائيًا.
-- **المصروفات**: تصنيفات وقابلية للاسترداد.
-
-### المشتريات والمخزون
-- **الموردون** وأوامر الشراء (مسودة → مؤكد → مستلم → ملغي) مع استقبال كميات جزئي.
-- **المنتجات**: تصنيفات ووحدات وأرقام SKU وتكلفة وسعر وحد أدنى.
-- **المستودعات** متعددة + **حركات مخزون** (رصيد افتتاحي، أوامر بيع، شراء، تحويل) ورفض السحب فوق المتاح.
-
-### تذاكر الدعم (Support)
-إنشاء، أولوية/تصنيف/حالة، تعيين، ردود **داخلية** (للمحاسبة/الدعم) وخارجية، إشعارات للمشرفين والمرتبطين.
-
-### الموارد البشرية والرواتب (HR)
-- **الموظفون والأقسام** مع صلاحية/دور منفصل.
-- **الحضور**: تسجيل يومي بحساب ساعات العمل وفروق الحالة.
-- **الرواتب**: دورة `generate → updateAmounts → approve → pay` مع بنود تفصيلية وقيد حذف للرواتب المعتمدة/المدفوعة، وسجل تدقيق لكل انتقال.
-
-### التقارير (Reports)
-لوحة تقارير + 5 تقارير قابلة للتصفية بالشهر (`?month=YYYY-MM`): **مبيعات** (مع رسم Chart.js شهري لنحو 6 أشهر)، **مخزون**، **أرباح**، **مصروفات**، **فواتير متأخرة** — كلها خلف صلاحية `view_reports`.
-
-### الأمان والإدارة
-- **الصلاحيات والأدوار**: 50+ صلاحية إجمالًا عبر 8 أدوار (شاملًا `view_reports` المضافة لأربعة أدوار).
-- **سجل التدقيق (AuditLog)**: لكل العمليات الحساسة عبر جميع الوحدات.
-- **الإشعارات** والوضع الليلي وواجهات RTL بحرف "Cairo".
+> **Demo Accounts**: `admin@crm.test` / `password` — Alternatively, use any of the pre-configured role-specific demo accounts (Sales Manager, Accountant, Warehouse Clerk, Purchasing Officer, Support Specialist, HR Specialist, etc.).
 
 ---
 
-## 🛠️ التقنية المستخدمة
+## Features & Modules
 
-| الطبقة | التقنية |
+### Customer Relationship Management (CRM)
+- **Lead Management**: Track sources, statuses, and follow-ups. Convert qualified leads seamlessly into customers.
+- **Customer Directory**: Manage corporate and individual clients, credit limits, account balances, and interaction history.
+- **Opportunities**: Monitor the sales pipeline with customizable stages and closing probabilities.
+- **Activities**: Schedule and log calls, emails, meetings, and tasks.
+
+### Sales & Financials
+- **Sales Orders**: Lifecycle management (Draft, Confirmed, Fulfilled, Canceled). Features automatic discount calculations, shipping fees, and automated inventory deduction upon confirmation.
+- **Invoicing**: Generate invoices directly from confirmed orders. Track statuses (Draft, Sent, Partially Paid, Paid, Overdue) and print professional copies.
+- **Payments**: Process multi-channel payments (Cash, Bank Transfer, Check, Card) with automatic invoice status reconciliation.
+- **Expenses**: Categorize and track corporate expenses, including reimbursable claims.
+
+### Procurement & Inventory Management
+- **Supplier Management**: Maintain supplier profiles and purchase histories.
+- **Purchase Orders**: Full lifecycle tracking with support for partial quantity receiving.
+- **Product Catalog**: Manage SKUs, categories, units, cost structures, pricing, and minimum stock alerts.
+- **Advanced Inventory**: Multi-warehouse support and precise stock movement tracking (Opening Balances, Sales, Purchases, Transfers) with strict validation against negative stock.
+
+### Support Desk
+- **Ticketing System**: Create, categorize, and prioritize support tickets. Assign tickets to specific agents, manage internal notes (e.g., Accounting/Support communication), and handle external replies with automated notifications.
+
+### Human Resources & Payroll (HR)
+- **Organization Structure**: Manage departments and employee profiles with independent system access roles.
+- **Attendance Tracking**: Daily logging with automated calculation of working hours and status variances.
+- **Payroll Processing**: A robust multi-step lifecycle (`Generate` -> `Update Amounts` -> `Approve` -> `Pay`). Includes detailed line items, strict validation against modifying approved/paid records, and comprehensive audit trails.
+
+### Analytics & Reporting
+- **Interactive Dashboard**: High-level metrics and visual charts.
+- **Detailed Reports**: Five modular, filterable reports (Sales Performance with 6-month historical charts, Inventory Valuation, Profitability, Expenses, and Overdue Invoices). Access is securely gated by the `view_reports` permission.
+
+### Security & Administration
+- **Role-Based Access Control (RBAC)**: Over 50 granular permissions distributed across 8 predefined roles.
+- **Audit Logging**: Immutable audit trails recording sensitive operations across all modules.
+- **System Interface**: Built with Tailwind CSS and Alpine.js, featuring a robust Dark Mode toggle and complete RTL optimization utilizing the "Cairo" typography.
+
+---
+
+## Technical Stack
+
+| Layer | Technology |
 |---|---|
-| Backend | PHP 8.2+ · Laravel 11 · Blade Components |
-| Database | MySQL · Eloquent (مع SoftDeletes) · Migrations |
-| Frontend | Tailwind CSS · Alpine.js · Chart.js · Cairo Font (RTL) |
-| Auth/RBAC | Breeze + Roles/Permissions مخصصة (Middleware) |
-| Testing | PHPUnit — **142 اختبارًا / 414 assertion** |
+| **Backend** | PHP 8.2+ · Laravel 11 · Blade Components |
+| **Database** | MySQL · Eloquent ORM (SoftDeletes) · Migrations |
+| **Frontend** | Tailwind CSS · Alpine.js · Chart.js · Cairo Font |
+| **Auth & Security**| Laravel Breeze · Custom RBAC Middleware |
+| **Quality Assurance**| PHPUnit — **142 Tests / 414 Assertions** |
 
 ---
 
-## 🚀 التشغيل محليًا
+## Local Development Setup
 
 ```bash
-# 1. المتطلبات: PHP 8.2+ و MySQL و Composer
+# 1. Prerequisites: PHP 8.2+, MySQL, and Composer
 composer install
 npm install && npm run build
 
-# 2. الإعداد
-cp .env.example .env          # عدّل بيانات اتصال MySQL في .env
+# 2. Environment Configuration
+cp .env.example .env
+# Update MySQL connection credentials in the .env file
 php artisan key:generate
 
-# 3. قاعدة البيانات + بيانات العرض التوضيحي الشاملة
+# 3. Database Migration & Comprehensive Seeding
 php artisan migrate:fresh --seed
 
-# 4. التشغيل
-php artisan serve             # http://127.0.0.1:8000
+# 4. Serve the Application
+php artisan serve
+# The application will be available at http://127.0.0.1:8000
 ```
 
-> `migrate:fresh --seed` يبني قاعدة كاملة ببيانات واقعية موزّعة على 6 أشهر: 15 عميلًا، 28 عميلًا محتملًا، 12 فرصة، 6 موردين، 12 أمر شراء، 24 أمر بيع، 19 فاتورة، 14 منتجًا، 9 رواتب، وتذاكر دعم.
+> **Note**: Executing `migrate:fresh --seed` provisions the database with a realistic 6-month historical dataset, including: 15 customers, 28 leads, 12 opportunities, 6 suppliers, 12 purchase orders, 24 sales orders, 19 invoices, 14 products, 9 payroll records, and various support tickets.
 
 ---
 
-## ✅ تشغيل الاختبارات
+## Testing
+
+Run the automated test suite to verify system integrity:
 
 ```bash
-php artisan test          # 142 امتحانًا ناجحًا
+php artisan test
+# Validates 142 passing tests ensuring robust business logic
 ```
 
 ---
 
-## 🗂️ بنية المشروع
+## Architecture & Directory Structure
 
-```
+```text
 app/
-├── Enums/                 # حالات الأعمال (أوامر، فواتير، رواتب، حضور، تذاكر…)
+├── Enums/                 # Strongly typed business states (Orders, Invoices, Tickets, etc.)
 ├── Models/
 │   ├── CRM/               # Lead, Customer, Opportunity, Activity, Ticket, SalesOrder
-│   ├── ERP/               # Product, Category, Unit, Warehouse, StockMovement,
-│   │                      # Supplier, PurchaseOrder, Invoice, Payment, Expense
-│   └── HR/                # Department, Employee, Attendance, Payroll, PayrollItem
-├── Services/              # منطق الأعمال (Stock, SalesOrder, Invoice, PurchaseOrder,
-│   │                      # Payroll, Ticket, Report, Notification, AuditLogger)
-└── Http/Controllers/      # وحدات التحكم (CRM, ERP, HR, Reports, Settings…)
+│   ├── ERP/               # Product, Category, Unit, Warehouse, StockMovement, Supplier, etc.
+│   └── HR/                # Department, Employee, Attendance, Payroll
+├── Services/              # Core business logic encapsulation (Stock, Invoicing, Payroll, Audit)
+└── Http/Controllers/      # Modular controllers handling specific domains
 database/
-├── migrations/            # 30+ migrat
-├── seeders/               # Rbac + بيانات Demo لكل وحدة + FinalDemoDataSeeder
-resources/views/           # Blade RTL (عربي) بدعم Dark Mode
-docs/                      # PLAN.md + مخطط قاعدة البيانات
-phases/                    # التوثيق التفصيلي لكل مرحلة (0→7)
+├── migrations/            # 30+ relational database migrations
+├── seeders/               # RBAC setup and realistic demographic/transactional data seeders
+resources/views/           # Component-based Blade templates with native Dark Mode support
+docs/                      # Architecture plans and database schemas
+phases/                    # Historical development phase documentation
 ```
 
 ---
 
-## 📚 المستندات
+## Documentation References
 
-- [`docs/PLAN.md`](docs/PLAN.md) — خطة المشروع الكاملة.
-- [`docs/DATABASE_SCHEMA.md`](docs/DATABASE_SCHEMA.md) — مخطط قاعدة البيانات.
-- [`phases/`](phases/) — تقارير تفصيلية لكل مرحلة (0 التحضير → 7 التقارير واللمسات النهائية).
-- [`docs/plans/`](docs/plans/) — خطط التنفيذ لكل مرحلة.
+- [`docs/PLAN.md`](docs/PLAN.md) — Comprehensive master project plan.
+- [`docs/DATABASE_SCHEMA.md`](docs/DATABASE_SCHEMA.md) — Relational database schema documentation.
+- [`phases/`](phases/) — Detailed sprint and phase execution reports (Phase 0 through 7).
+- [`docs/plans/`](docs/plans/) — Granular implementation plans for individual features.
 
 ---
 
-## 🔑 أدوار العرض التوضيحي
+## Demo Role Credentials
 
-| الدور | البريد | الصلاحيات الرئيسية |
+All demonstration accounts share the same password: `password`
+
+| Role | Email | Primary Permissions |
 |---|---|---|
-| مدير النظام | `admin@crm.test` | كل الصلاحيات |
-| مدير المبيعات | `manager@crm.test` | CRM، أوامر بيع، تقارير |
-| مندوب مبيعات | `rep@crm.test` | Leads/عملاء/فرص/أوامر |
-| أخصائي دعم | `support@crm.test` | تذاكر |
-| محاسب | `accountant@crm.test` | فواتير/مدفوعات/مصروفات/تقارير |
-| مأمور مخزن | `warehouse@crm.test` | منتجات/مخزون/استلام |
-| مسؤول مشتريات | `purchasing@crm.test` | موردون/أوامر شراء/تقارير |
-| أخصائي موارد بشرية | `hr@crm.test` | موظفون/رواتب/حضور |
-
-كلها بنفس كلمة المرور: `password`
+| **System Administrator** | `admin@crm.test` | Full System Access |
+| **Sales Manager** | `manager@crm.test` | CRM, Sales Orders, Reporting |
+| **Sales Representative** | `rep@crm.test` | Leads, Customers, Opportunities, Orders |
+| **Support Specialist** | `support@crm.test` | Support Tickets |
+| **Accountant** | `accountant@crm.test` | Invoices, Payments, Expenses, Reporting |
+| **Warehouse Clerk** | `warehouse@crm.test` | Products, Inventory, Goods Receipt |
+| **Purchasing Officer** | `purchasing@crm.test` | Suppliers, Purchase Orders, Reporting |
+| **HR Specialist** | `hr@crm.test` | Employees, Payroll, Attendance |
 
 ---
 
-## 📝 ملاحظات
+## Additional Notes
 
-- المشروع غير مرتبط بمستودع Git حاليًا (يُصدَّر/يُنشر حسب الحاجة).
-- نظام الصلاحيات مبني على `Permission::slug` ويُسدَّد تلقائيًا عبر `RbacSeeder`.
+- The permissions architecture relies on scalable `Permission::slug` mapping, automatically provisioned via `RbacSeeder`.

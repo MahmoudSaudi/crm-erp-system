@@ -24,7 +24,7 @@
         </div>
 
         <form method="GET" action="{{ route('attendance.index') }}" class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <div>
                     <x-input-label for="month" value="الشهر" />
                     <x-text-input id="month" name="month" type="month" class="mt-1 block w-full" value="{{ $month }}" />
@@ -47,12 +47,12 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-            <div class="mt-3 flex items-center gap-2">
-                <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600">تصفية</button>
-                @if (request()->hasAny(['month', 'employee_id', 'status']))
-                    <a href="{{ route('attendance.index') }}" class="inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800">مسح</a>
-                @endif
+                <div class="flex items-end gap-2">
+                    <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600">تصفية</button>
+                    @if (request()->hasAny(['month', 'employee_id', 'status']))
+                        <a href="{{ route('attendance.index') }}" class="inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800">مسح</a>
+                    @endif
+                </div>
             </div>
         </form>
 

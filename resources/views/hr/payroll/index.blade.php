@@ -24,7 +24,7 @@
         </div>
 
         <form method="GET" action="{{ route('payroll.index') }}" class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                     <x-input-label for="period" value="الفترة" />
                     <x-text-input id="period" name="period" type="month" class="mt-1 block w-full" value="{{ $period }}" />
@@ -38,12 +38,12 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-            <div class="mt-3 flex items-center gap-2">
-                <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600">تصفية</button>
-                @if (request()->hasAny(['period', 'status']))
-                    <a href="{{ route('payroll.index') }}" class="inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800">مسح</a>
-                @endif
+                <div class="flex items-end gap-2">
+                    <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600">تصفية</button>
+                    @if (request()->hasAny(['period', 'status']))
+                        <a href="{{ route('payroll.index') }}" class="inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800">مسح</a>
+                    @endif
+                </div>
             </div>
         </form>
 

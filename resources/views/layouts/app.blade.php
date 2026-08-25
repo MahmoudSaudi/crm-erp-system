@@ -25,8 +25,21 @@
 
         <!-- Styles -->
         @vite(['resources/css/app.css'])
-    </head>    <body class="font-sans antialiased bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-200">
-        <div x-data="layout()" class="min-h-screen">
+
+        <style>
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            /* Hide scrollbar for IE, Edge and Firefox */
+            .scrollbar-hide {
+                -ms-overflow-style: none !important;  /* IE and Edge */
+                scrollbar-width: none !important;  /* Firefox */
+            }
+        </style>
+    </head>    <body class="font-sans antialiased bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-200 overflow-x-hidden">
+        <div x-data="layout()" class="min-h-screen flex flex-col overflow-x-hidden w-full">
             @include('layouts.partials.sidebar')
 
             {{-- Backdrop (mobile فقط) --}}
@@ -38,10 +51,10 @@
                 x-cloak
             ></div>
 
-            <div x-bind:class="isDesktop && !collapsed ? 'lg:pr-72' : ''">
+            <div x-bind:class="isDesktop && !collapsed ? 'lg:pr-72' : ''" class="flex-1 flex flex-col min-w-0 w-full transition-all duration-200">
                 @include('layouts.partials.topbar')
 
-                <main class="px-4 sm:px-6 lg:px-8 py-6" dir="rtl">
+                <main class="flex-1 px-4 sm:px-6 lg:px-8 py-6 w-full" dir="rtl">
                     {{-- Flash messages --}}
                     @if (session('success'))
                         <div class="mb-4 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300">

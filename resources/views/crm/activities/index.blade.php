@@ -16,10 +16,10 @@
         </div>
 
         <form method="GET" action="{{ route('activities.index') }}" class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-            <div class="flex flex-wrap items-end gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                     <x-input-label for="type" value="النوع" />
-                    <select id="type" name="type" class="mt-1 block w-48 rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200">
+                    <select id="type" name="type" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200">
                         <option value="">كل الأنواع</option>
                         @foreach ($types as $value => $label)
                             <option value="{{ $value }}" @selected($activeType === $value)>{{ $label }}</option>
@@ -28,16 +28,18 @@
                 </div>
                 <div>
                     <x-input-label for="scope" value="الحالة" />
-                    <select id="scope" name="scope" class="mt-1 block w-40 rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200">
+                    <select id="scope" name="scope" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200">
                         <option value="all" @selected($activeScope === 'all')>الكل</option>
                         <option value="pending" @selected($activeScope === 'pending')>قيد الانتظار</option>
                         <option value="completed" @selected($activeScope === 'completed')>مكتمل</option>
                     </select>
                 </div>
-                <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600">{{ __('تصفية') }}</button>
-                @if (request()->hasAny(['type', 'scope']))
-                    <a href="{{ route('activities.index') }}" class="inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800">{{ __('مسح') }}</a>
-                @endif
+                <div class="flex items-end gap-2">
+                    <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600">{{ __('تصفية') }}</button>
+                    @if (request()->hasAny(['type', 'scope']))
+                        <a href="{{ route('activities.index') }}" class="inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800">{{ __('مسح') }}</a>
+                    @endif
+                </div>
             </div>
         </form>
 
