@@ -1,0 +1,52 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Dependencies (هنعيد بناءها جوا الـ image)
+node_modules
+vendor
+
+# Build artifacts (هنبنيها جوا الـ image)
+public/build
+public/hot
+public/storage
+
+# Storage (بيتولد جوا الـ container)
+storage/logs/*
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/app/public/*
+bootstrap/cache/*.php
+
+# Dev tools
+.idea
+.vscode
+.vscode-server
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Docker files themselves (مش محتاجينهم جوا الصورة)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Tests (مش محتاجينهم في production image)
+tests
+phpunit.xml
+
+# Docs
+README.md
