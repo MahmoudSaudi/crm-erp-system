@@ -198,3 +198,4 @@ All demonstration accounts share the same password: `password`
 ## Additional Notes
 
 - The permissions architecture relies on scalable `Permission::slug` mapping, automatically provisioned via `RbacSeeder`.
+
