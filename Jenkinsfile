@@ -46,7 +46,7 @@ pipeline {
                 sh """
                     docker run --rm \
                         -e APP_ENV=testing \
-                        -e APP_KEY=base64:$(openssl rand -base64 32) \
+                        -e APP_KEY=base64:\$(openssl rand -base64 32) \
                         ${IMAGE_NAME}:${IMAGE_TAG} \
                         php artisan test || echo 'No tests yet'
                 """
