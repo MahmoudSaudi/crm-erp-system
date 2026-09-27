@@ -8,6 +8,60 @@ A comprehensive, enterprise-grade web application built with **Laravel 11** and 
 
 ---
 
+
+
+# CRM ERP System
+
+نظام إدارة علاقات العملاء والموارد المؤسسية.
+
+## Stack
+
+- Laravel 11 (PHP 8.2)
+- MySQL 8.0
+- Nginx 1.27
+- Docker + Docker Compose
+
+## المتطلبات
+
+- Docker Engine 24+
+- Docker Compose v2+
+
+## التشغيل السريع
+
+```bash
+# 1. Clone
+git clone git@github.com:<username>/crm-erp-system.git
+cd crm-erp-system
+
+# 2. جهّز .env.docker
+cp .env.docker.example .env.docker
+# عدّل APP_KEY:
+KEY="base64:$(openssl rand -base64 32)"
+sed -i "s|^APP_KEY=.*|APP_KEY=$KEY|" .env.docker
+
+# 3. شغّل الـ stack
+docker compose up -d
+
+# 4. اعمل migrations
+docker compose exec app php artisan migrate --force
+
+# 5. (لو محتاج) اعمل جدول sessions
+docker compose exec db mysql -u crm_user -pcrm_secret_2026 crm_erp -e "
+CREATE TABLE IF NOT EXISTS sessions (
+  id VARCHAR(255) NOT NULL PRIMARY KEY,
+  user_id BIGINT UNSIGNED NULL,
+  ip_address VARCHAR(45) NULL,
+  user_agent TEXT NULL,
+  payload LONGTEXT NOT NULL,
+  last_activity INT NOT NULL,
+  INDEX sessions_user_id_index (user_id),
+  INDEX sessions_last_activity_index (last_activity)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+"
+
+
+
+
 ## Features & Modules
 
 ### Customer Relationship Management (CRM)
