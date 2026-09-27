@@ -17,3 +17,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+.env.docker
+
+# --- Docker ---
+.env.docker
+.env.*.local
+docker-compose.yml
