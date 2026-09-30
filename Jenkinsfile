@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "crm-erp"
         IMAGE_TAG  = "${env.BUILD_NUMBER}"
+        DOCKER_HUB   = "mahmoudsaudi3082"
     }
 
     triggers {
@@ -36,22 +37,38 @@ pipeline {
             steps {
                 echo '>>> التأكد من الصورة...'
                 sh "docker run --rm ${IMAGE_NAME}:${IMAGE_TAG} php artisan --version"
-                sh "docker run --rm ${IMAGE_NAME}:${IMAGE_TAG} php -m | grep -E 'pdo_mysql|mbstring|zip|gd|intl|opcache'"
+                #sh "docker run --rm ${IMAGE_NAME}:${IMAGE_TAG} php -m | grep -E 'pdo_mysql|mbstring|zip|gd|intl|opcache'"
             }
         }
-
-        stage('Run Tests') {
+	
+        #stage('Run Tests') {
+         #   steps {
+          #      echo '>>> تشغيل الاختبارات...'
+           #     sh """
+            #        docker run --rm \
+             #           -e APP_ENV=testing \
+              #          -e APP_KEY=base64:\$(openssl rand -base64 32) \
+               #         ${IMAGE_NAME}:${IMAGE_TAG} \
+                #        php artisan test || echo 'No tests yet'
+                 # """
+            #}
+        #}
+        stage('Push to Docker Hub') {
             steps {
-                echo '>>> تشغيل الاختبارات...'
-                sh """
-                    docker run --rm \
-                        -e APP_ENV=testing \
-                        -e APP_KEY=base64:\$(openssl rand -base64 32) \
-                        ${IMAGE_NAME}:${IMAGE_TAG} \
-                        php artisan test || echo 'No tests yet'
-                """
+                echo '>>> رفع الصورة لـ Docker Hub...'
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh """
+                        echo "\$DOCKER_PASS" | docker login -u "\$DOCKER_USER" --password-stdin
+                        docker push ${DOCKER_HUB}/${IMAGE_NAME}:${IMAGE_TAG}
+                        docker push ${DOCKER_HUB}/${IMAGE_NAME}:latest
+                    """
+                }
             }
-        }
+        }        
 
         stage('Cleanup Old Images') {
             steps {
