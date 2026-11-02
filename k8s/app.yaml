@@ -1,0 +1,105 @@
+---
+# ============================================================
+# 1. PVC للكود المشترك (nginx + php-fpm)
+# ============================================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-code
+  namespace: crm-erp
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+# ============================================================
+# 2. Deployment
+# ============================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crm-app
+  namespace: crm-erp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crm-app
+  template:
+    metadata:
+      labels:
+        app: crm-app
+    spec:
+      # --------------------------------------------------------
+      # initContainer: ينسخ الكود من الـ image للـ PVC
+      # --------------------------------------------------------
+      initContainers:
+        - name: copy-code
+          image: crm-erp:latest
+          imagePullPolicy: Never
+          command: ["/bin/sh", "-c"]
+          args:
+            - cp -r --no-preserve=mode,ownership,timestamps /var/www/html/. /shared-code/ && chmod -R 775 /shared-code/storage /shared-code/bootstrap/cache
+          volumeMounts:
+            - name: app-code
+              mountPath: /shared-code
+
+      containers:
+        # ----------------------------------------------------
+        # Container 1: php-fpm
+        # ----------------------------------------------------
+        - name: php-fpm
+          image: crm-erp:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9000
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secrets
+          volumeMounts:
+            - name: app-code
+              mountPath: /var/www/html
+
+        # ----------------------------------------------------
+        # Container 2: nginx
+        # ----------------------------------------------------
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: app-code
+              mountPath: /var/www/html
+              readOnly: true
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+
+      volumes:
+        - name: app-code
+          persistentVolumeClaim:
+            claimName: app-code
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+---
+# ============================================================
+# 3. Service للـ nginx (يوصل من المتصفح)
+# ============================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: crm-app
+  namespace: crm-erp
+spec:
+  selector:
+    app: crm-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  type: NodePort

@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: crm-erp
+data:
+  default.conf: |
+    server {
+        listen 80;
+        server_name _;
+
+        root /var/www/html/public;
+        index index.php index.html;
+
+        charset utf-8;
+        client_max_body_size 20M;
+
+        access_log /dev/stdout;
+        error_log  /dev/stderr warn;
+
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+            fastcgi_read_timeout 300;
+        }
+
+        location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2|ttf|eot|map)$ {
+            expires 30d;
+            add_header Cache-Control "public, immutable";
+            access_log off;
+            try_files $uri =404;
+        }
+
+        location ~ /\.(?!well-known).* {
+            deny all;
+            access_log off;
+            log_not_found off;
+        }
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location = /robots.txt  { access_log off; log_not_found off; }
+
+        location ~* /storage/.*\.php$ {
+            deny all;
+        }
+    }
